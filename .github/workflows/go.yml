@@ -22,7 +22,15 @@ jobs:
         go-version: '1.20'
 
     - name: Build
-      run: go build -v ./...
+      run: |
+        for dir in $(find . -name "go.mod" -type f | sed 's|/go.mod||' | sort); do
+          echo "Building in $dir"
+          (cd "$dir" && go build -v ./...)
+        done
 
     - name: Test
-      run: go test -v ./...
+      run: |
+        for dir in $(find . -name "go.mod" -type f | sed 's|/go.mod||' | sort); do
+          echo "Testing in $dir"
+          (cd "$dir" && go test -v ./...)
+        done
