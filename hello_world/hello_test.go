@@ -11,15 +11,21 @@ func TestHello(t *testing.T) {
 		}
 	}
 
+	t.Run("verify the lang", func(t *testing.T) {
+		result := Hello("Jamile", "spanish")
+		expected := "Hola, Jamile"
+		verifyCorrectMessage(t, result, expected)
+	})
+
 	t.Run("say hello to people", func(t *testing.T) {
-		result := Hello("Jamile")
+		result := Hello("Jamile", "english")
 		expected := "Hello, Jamile"
 
 		verifyCorrectMessage(t, result, expected)
 	})
 
 	t.Run("say 'Hello, World' when an empty string is sent", func(t *testing.T) {
-		result := Hello("")
+		result := Hello("", "")
 		expected := "Hello, World"
 
 		verifyCorrectMessage(t, result, expected)

@@ -2,15 +2,33 @@ package main
 
 import "fmt"
 
-const prefixHelloPortuguese = "Hello, "
+const (
+	English    = "english"
+	Portuguese = "portuguese"
+	Spanish    = "spanish"
+	French     = "french"
+)
 
-func Hello(name string) string {
+var prefixes = map[string]string{
+	English:    "Hello, ",
+	Portuguese: "Oi, ",
+	Spanish:    "Hola, ",
+	French:     "Bonjour, ",
+}
+
+func Hello(name string, lang string) string {
 	if name == "" {
 		name = "World"
 	}
-	return prefixHelloPortuguese + name
+
+	prefix, ok := prefixes[lang]
+	if !ok {
+		prefix = "Hello, " // default value
+	}
+
+	return prefix + name
 }
 
 func main() {
-	fmt.Println(Hello(""))
+	fmt.Println(Hello("", ""))
 }
